@@ -103,18 +103,19 @@ function saldoDevedor(mes, ano) {
         4: 33656.99,
         5: 33656.99,
         6: 66692.47,
-        7: 66692.47,
-        8: 66692.47,
-        9: 66692.47,
-        10: 66692.47,
-        11: 66692.47,
-        12: 66692.47,
+        7: 66608.15,
+        8: 66608.15,
+        9: 66608.15,
+        10: 66608.15,
+        11: 66608.15,
+        12: 66608.15,
       },
     },
   ];
 
-  for (const iterator of saldoDevedor) {
-    return iterator[ano][mes];
+  for (let index = 0; index < saldoDevedor.length; index++) {
+    const element = saldoDevedor[index];
+    return element[ano][mes];
   }
 }
 
@@ -123,15 +124,19 @@ async function createTable() {
 
   $(document).ready(function () {
     var tabela = $("#tabela").DataTable({
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json",
-      },
+      // language: {
+      //   url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json",
+      // },
+      lengthChange: false,
+      buttons: ["copy", "excel", "pdf", "colvis"],
     });
 
-    for (const iterator of dadosIpca) {
+    for (let index = 0; index < dadosIpca.length; index++) {
+      const iterator = dadosIpca[index];
+
       const data = Object.values(iterator).slice(2, iterator.length);
-      console.log(data);
       tabela.row.add(data).draw(false);
+      tabela.buttons().container().appendTo("#tabela_wrapper .col-md-6:eq(0)");
     }
   });
 }
