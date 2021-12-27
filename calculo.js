@@ -21,11 +21,19 @@ function formatarData(ano, mes) {
     dataIPCA.setMonth(2);
 
     mes = dataIPCA.getMonth();
+    ano = dataIPCA.getFullYear();
   } else {
     mes = dataIPCA.getMonth() + 3;
+    ano = dataIPCA.getFullYear();
   }
 
-  ano = dataIPCA.getFullYear();
+  if (ano == 2021 && mes >= 13) {
+    dataIPCA.setFullYear(2022);
+    dataIPCA.setMonth(mes - 12);
+
+    mes = dataIPCA.getMonth();
+    ano = dataIPCA.getFullYear();
+  }
 
   return { ano, mes };
 }
@@ -60,6 +68,7 @@ async function calcular() {
         year: "numeric",
         month: "long",
       }),
+
       saldoDevedor: saldoDoMes.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
@@ -90,7 +99,6 @@ async function calcular() {
     conteudo.push(result);
   }
 
-  console.log(conteudo);
   return conteudo;
 }
 
@@ -110,14 +118,15 @@ function saldoDevedor(mes, ano) {
         11: 115120.22,
         12: 115120.22,
       },
-     2022: {
-        1: 138531.90
-     },
+      2022: {
+        1: 138531.9,
+      },
     },
   ];
 
-  for (let index = 0; index < saldoDevedor.length; index++) {
-    const element = saldoDevedor[index];
+  for (let index = 0; index < Object.keys(saldoDevedor[0]).length; index++) {
+    const element = saldoDevedor[0];
+    console.log(element[2022][1]);
     return element[ano][mes];
   }
 }
