@@ -3,7 +3,7 @@ function BuscarDados() {
     const settings = {
       async: true,
       crossDomain: true,
-      url: "https://apisidra.ibge.gov.br/values/t/1737/n1/1/v/63/p/202012-202112/d/2?formato=json",
+      url: "https://apisidra.ibge.gov.br/values/t/1737/n1/1/v/63/p/202012-202212/d/2?formato=json",
       method: "GET",
     };
 
@@ -119,7 +119,12 @@ function saldoDevedor(mes, ano) {
         12: 115120.22,
       },
       2022: {
-        1: 138531.9,
+        1: 137814.9,
+        2: 137814.9,
+        3: 137814.9,
+        4: 137814.9,
+        5: 137814.9,
+        6: 137814.9,
       },
     },
   ];
